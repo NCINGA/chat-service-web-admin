@@ -1,7 +1,7 @@
 import './App.css'
 import Login from './pages/Login'
-import { UserManagement } from './pages/userManagement'
 import { BrowserRouter, Route,Routes } from 'react-router-dom'
+import UserManagement from './pages/userManagement'
 
 function App() {
   return (
