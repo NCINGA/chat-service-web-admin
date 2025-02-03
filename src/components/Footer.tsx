@@ -7,13 +7,14 @@ import Link from "@mui/material/Link";
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="#8CA1B0">
+    <Typography variant="body2" color="#535557">
       {"Designed & Developed by ©" + "  "}
       <Link color="inherit"></Link> {new Date().getFullYear()}
       {"."}
     </Typography>
   );
 }
+
 const defaultTheme = createTheme();
 
 export default function Footer() {
@@ -21,13 +22,13 @@ export default function Footer() {
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <Box
-        width="100vw"
-        height="160px"
         component="footer"
         sx={{
-          py: 4,
-          //px: 10,
-          mt: "auto",
+          py: 1, 
+          height: "75px", 
+          display: "flex",
+          alignItems: "center", 
+          justifyContent: "center", 
           textAlign: "center",
           backgroundColor: "#40BFB4",
           color: "#FFFFFF",
@@ -35,13 +36,8 @@ export default function Footer() {
         }}
       >
         <Container maxWidth="sm">
-          <Typography variant="body1">
-            <b>NCINGA pvt Ltd</b>{" "}
-            <small>
-              <br />
-              Help Desk Chat Bot <br /> P.O. Box 856 Colombo 01, Sri Lanka
-              <br /> <br />
-            </small>
+          <Typography variant="body2">
+            <b>NCINGA pvt Ltd</b> | Help Desk Chat Bot
           </Typography>
           <Copyright />
         </Container>
