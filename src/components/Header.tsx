@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -6,14 +6,22 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import Drawer from "@mui/material/Drawer";
 import { useNavigate } from "react-router-dom";
+import AppDrawer from "./AppDrawer";
+
+
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleLogout = () => {
-    // Navigate to the login page
     navigate("/");
+  };
+
+  const toggleDrawer = (open: boolean) => () => {
+    setDrawerOpen(open);
   };
 
   return (
@@ -26,6 +34,7 @@ const Header: React.FC = () => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={toggleDrawer(true)}
           >
             <MenuIcon />
           </IconButton>
@@ -39,6 +48,10 @@ const Header: React.FC = () => {
           </IconButton>
         </Toolbar>
       </AppBar>
+
+      <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+        <AppDrawer />
+      </Drawer>
     </Box>
   );
 };

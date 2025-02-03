@@ -5,13 +5,16 @@ import Login from "./pages/Login";
 import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
 import UserManagement from "./pages/userManagement";
 
+
 const Layout = () => {
   return (
-    <>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <Header />
-      <Outlet /> {/* This renders the nested routes */}
+      <div style={{ flex: 1 }}>
+        <Outlet />
+      </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
