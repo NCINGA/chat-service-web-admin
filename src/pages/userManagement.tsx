@@ -392,6 +392,7 @@ const UserManagement: React.FC = () => {
       </Box>
     </Container>
   );
+
 };
 
 export default UserManagement;
