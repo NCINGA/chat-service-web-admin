@@ -1,47 +1,38 @@
-import CssBaseline from "@mui/material/CssBaseline";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
+import { Box, Divider, Link, Typography } from "@mui/material";
+import logo from "../../public/Logo.svg";
 
-function Copyright() {
+const footer = () => {
   return (
-    <Typography variant="body2" color="#535557">
-      {"Designed & Developed by ©" + "  "}
-      <Link color="inherit"></Link> {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const defaultTheme = createTheme();
-
-export default function Footer() {
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <CssBaseline />
-      <Box
-        component="footer"
-        sx={{
-          py: 1, 
-          height: "75px", 
-          display: "flex",
-          alignItems: "center", 
-          justifyContent: "center", 
-          textAlign: "center",
-          backgroundColor: "#40BFB4",
-          color: "#FFFFFF",
-          fontFamily: "Poppins",
-        }}
+    <Box
+      className="fixed-bottom"
+      style={{
+        position: "relative",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        width: "100%",
+      }}
+      sx={{ bgcolor: "background.paper", p: 4 }}
+      component="footer"
+      zIndex={-1}
+    >
+      <Divider />
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        align="center"
+        style={{ marginTop: "2%" }}
       >
-        <Container maxWidth="sm">
-          <Typography variant="body2">
-            <b>NCINGA pvt Ltd</b> | Help Desk Chat Bot
-          </Typography>
-          <Copyright />
-        </Container>
-      </Box>
-    </ThemeProvider>
+        {"Copyright © "}
+        <Link color="inherit" href="https://www.ncinga.net/">
+          <img src={logo} alt="logo" style={{ width: "60px" }} />
+        </Link>{" "}
+        <br />
+        {new Date().getFullYear()}
+        {"."}
+      </Typography>
+    </Box>
   );
-}
+};
+
+export default footer;
