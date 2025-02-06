@@ -9,18 +9,23 @@ import { CssBaseline } from "@mui/material";
 
 const Layout = () => {
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh", // Full height
+      }}
+    >
       <CssBaseline />
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <Header />
-        <div style={{ flex: 1 }}>
-          <Outlet />
-        </div>
-        <Footer />
+      <Header />
+      <div style={{ flex: 1, paddingBottom: "50px" }}>
+        <Outlet />
       </div>
-    </>
+      <Footer />
+    </div>
   );
 };
+
 
 function App() {
   return (
