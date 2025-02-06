@@ -11,9 +11,9 @@ const Layout = () => {
   return (
     <>
       <CssBaseline />
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         <Header />
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, paddingBottom: "80px" }}> 
           <Outlet />
         </div>
         <Footer />
@@ -21,6 +21,7 @@ const Layout = () => {
     </>
   );
 };
+
 
 function App() {
   return (
