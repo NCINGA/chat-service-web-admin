@@ -1,20 +1,20 @@
 import { Box, Divider, Link, Typography } from "@mui/material";
 import logo from "../../public/Logo.svg";
 
-const footer = () => {
+const Footer = () => {
   return (
     <Box
-      className="fixed-bottom"
-      style={{
-        position: "relative",
+      component="footer"
+      sx={{
+        position: "fixed",
         bottom: 0,
         left: 0,
         right: 0,
         width: "100%",
+        bgcolor: "background.paper",
+        p: 4,
+        zIndex: 1000,  // Ensure footer is above other content
       }}
-      sx={{ bgcolor: "background.paper", p: 4 }}
-      component="footer"
-      zIndex={-1}
     >
       <Divider />
       <Typography
@@ -35,4 +35,4 @@ const footer = () => {
   );
 };
 
-export default footer;
+export default Footer;
