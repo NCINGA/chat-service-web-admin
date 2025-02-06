@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Box,
-  Container,
   Paper,
   Typography,
   Button,
@@ -32,6 +31,7 @@ import {
   Delete as DeleteIcon,
 } from "@mui/icons-material";
 import UserRegistrationForm from "../components/UserManagementComponent/userAddFoarm";
+import BGIMG from "../assets/BgImg.png";
 
 enum UserRole {
   ADMIN = "admin",
@@ -52,7 +52,7 @@ interface IFormData {
   name: string;
   email: string;
   password: string;
-  userRole: UserRole ;
+  userRole: UserRole | "";
   companyRegistered: string;
   profilePic: File | null;
 }
@@ -81,7 +81,6 @@ const UserManagement: React.FC = () => {
       profilePic: "",
       createdAt: "2025-01-02T00:00:00Z",
     },
-    // More dummy users
   ];
 
   const [users, setUsers] = useState<IUser[]>(dummyUsers);
@@ -94,12 +93,16 @@ const UserManagement: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState<IUser | null>(null);
-  // const [isSeverity, setIsSeverity] = useState("")
 
   const handleAddUser = async (userData: IFormData): Promise<void> => {
     try {
       setIsLoading(true);
       setError(null);
+
+      // Ensure userRole is not empty string before creating new user
+      if (userData.userRole === "") {
+        throw new Error("User role is required");
+      }
 
       const newUser: IUser = {
         _id: Math.random().toString(36).substr(2, 9),
@@ -113,10 +116,9 @@ const UserManagement: React.FC = () => {
 
       setUsers((prevUsers) => [...prevUsers, newUser]);
       setSuccessMessage("User added successfully");
-      // setIsSeverity("success")
       setIsFormOpen(false);
     } catch (error) {
-      setError("Failed to add user");
+      setError(error instanceof Error ? error.message : "Failed to add user");
       console.error("Error adding user:", error);
     } finally {
       setIsLoading(false);
@@ -129,6 +131,11 @@ const UserManagement: React.FC = () => {
     try {
       setIsLoading(true);
       setError(null);
+
+      // Ensure userRole is not empty string before updating
+      if (userData.userRole === "") {
+        throw new Error("User role is required");
+      }
 
       const updatedUser: IUser = {
         ...selectedUser,
@@ -148,14 +155,16 @@ const UserManagement: React.FC = () => {
       setIsFormOpen(false);
       setSelectedUser(null);
     } catch (error) {
-      setError("Failed to update user");
+      setError(
+        error instanceof Error ? error.message : "Failed to update user"
+      );
       console.error("Error updating user:", error);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleConfirmDelete = async () => {
+  const handleConfirmDelete = async (): Promise<void> => {
     if (!userToDelete) return;
 
     try {
@@ -176,40 +185,41 @@ const UserManagement: React.FC = () => {
     }
   };
 
-  const handleEditClick = (user: IUser) => {
+  const handleEditClick = (user: IUser): void => {
     setSelectedUser(user);
     setIsFormOpen(true);
   };
 
-  const handleDeleteClick = (user: IUser) => {
+  const handleDeleteClick = (user: IUser): void => {
     setUserToDelete(user);
     setIsDeleteDialogOpen(true);
   };
 
-  const handleCloseForm = () => {
+  const handleCloseForm = (): void => {
     setIsFormOpen(false);
     setSelectedUser(null);
     setError(null);
   };
 
-  const handleChangePage = (_event: unknown, newPage: number) => {
+  const handleChangePage = (_event: unknown, newPage: number): void => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  ): void => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
-  const handleCloseSnackbar = () => {
+  const handleCloseSnackbar = (): void => {
     setSuccessMessage(null);
     setError(null);
   };
 
   return (
-    <Container>
+    <div style={{ maxWidth: "95%", margin: "0 auto" }}>
+      <img src={BGIMG} alt="BGCover" style={{ width: "100%" }} />
       <Box sx={{ mt: 2, mb: 4 }}>
         <Box
           display="flex"
@@ -323,6 +333,7 @@ const UserManagement: React.FC = () => {
             onPageChange={handleChangePage}
             rowsPerPage={rowsPerPage}
             onRowsPerPageChange={handleChangeRowsPerPage}
+            rowsPerPageOptions={[5, 10, 25]}
           />
         </TableContainer>
 
@@ -382,7 +393,7 @@ const UserManagement: React.FC = () => {
         >
           <Alert
             onClose={handleCloseSnackbar}
-            severity="success"
+            severity={error ? "error" : "success"}
             variant="filled"
             sx={{ width: "100%" }}
           >
@@ -390,9 +401,8 @@ const UserManagement: React.FC = () => {
           </Alert>
         </Snackbar>
       </Box>
-    </Container>
+    </div>
   );
-
 };
 
 export default UserManagement;

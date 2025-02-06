@@ -1,12 +1,23 @@
 import React from "react";
-import { Box, Typography, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import {
+  Box,
+  Typography,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import sideBar from "../assets/sideBar.png";
+import BuildCircleRoundedIcon from "@mui/icons-material/BuildCircleRounded";
 
 const AppDrawer: React.FC = () => {
-  function handleLogout(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
+  function handleLogout(
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ): void {
     event.preventDefault();
     console.log("Logging out...");
     window.location.href = "/";
@@ -15,7 +26,7 @@ const AppDrawer: React.FC = () => {
   return (
     <Box
       sx={{
-        width: 250,
+        width: 300,
         padding: 2,
         height: "100vh",
         color: "white",
@@ -30,7 +41,6 @@ const AppDrawer: React.FC = () => {
         justifyContent: "space-between",
       }}
     >
-      {/* Overlay to blend the teal color with the background image */}
       <Box
         sx={{
           position: "absolute",
@@ -44,28 +54,52 @@ const AppDrawer: React.FC = () => {
       />
 
       <Box sx={{ position: "relative", zIndex: 2 }}>
-        <Typography variant="h6" sx={{ marginBottom: 2 }}>Menu</Typography>
+        <Typography variant="h6" sx={{ marginBottom: 2 }}>
+          Menu
+        </Typography>
         <List>
-          <ListItem disablePadding>
+          <ListItem
+            sx={{ color: "white" }}
+            onClick={() => (window.location.href = "/home")}
+          >
             <ListItemButton sx={{ color: "white" }}>
-              <ListItemIcon sx={{ color: "white" }}><HomeIcon /></ListItemIcon>
+              <ListItemIcon sx={{ color: "white" }}>
+                <HomeIcon />
+              </ListItemIcon>
               <ListItemText primary={<>Home</>} />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
+          <ListItem
+            sx={{ color: "white" }}
+            onClick={() => (window.location.href = "/user")}
+          >
             <ListItemButton sx={{ color: "white" }}>
-              <ListItemIcon sx={{ color: "white" }}><PersonIcon /></ListItemIcon>
+              <ListItemIcon sx={{ color: "white" }}>
+                <PersonIcon />
+              </ListItemIcon>
               <ListItemText primary={<>User Management</>} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem
+            sx={{ color: "white" }}
+            onClick={() => (window.location.href = "/configuration")}
+          >
+            <ListItemButton sx={{ color: "white" }}>
+              <ListItemIcon sx={{ color: "white" }}>
+                <BuildCircleRoundedIcon />
+              </ListItemIcon>
+              <ListItemText primary={<>Configuration</>} />
             </ListItemButton>
           </ListItem>
         </List>
       </Box>
 
-      
       <Box sx={{ position: "relative", zIndex: 2 }}>
         <ListItem disablePadding>
           <ListItemButton sx={{ color: "white" }} onClick={handleLogout}>
-            <ListItemIcon sx={{ color: "white" }}><ExitToAppIcon /></ListItemIcon>
+            <ListItemIcon sx={{ color: "white" }}>
+              <ExitToAppIcon />
+            </ListItemIcon>
             <ListItemText primary={<strong>Logout</strong>} />
           </ListItemButton>
         </ListItem>

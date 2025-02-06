@@ -4,17 +4,21 @@ import Header from "./components/Header";
 import Login from "./pages/Login";
 import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
 import UserManagement from "./pages/userManagement";
-
+import ConfigUI from "./pages/configuration";
+import { CssBaseline } from "@mui/material";
 
 const Layout = () => {
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      <Header />
-      <div style={{ flex: 1 }}>
-        <Outlet />
+    <>
+      <CssBaseline />
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <Header />
+        <div style={{ flex: 1 }}>
+          <Outlet />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 
@@ -27,6 +31,7 @@ function App() {
 
         <Route element={<Layout />}>
           <Route path="/user" element={<UserManagement />} />
+          <Route path="/configuration" element={<ConfigUI />} />
         </Route>
       </Routes>
     </BrowserRouter>

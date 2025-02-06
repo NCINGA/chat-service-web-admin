@@ -1,22 +1,14 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import BgImgLogin from "../assets/bg.png";
 import Grid from "@mui/material/Grid2";
 import LoginForm from "../components/LoginScreenComponent/loginForm";
-// import SignupForm from "../components/LoginScreenComponent/signupform";
-// import { Tabs, Tab } from "@mui/material";
-// import {  useState } from "react";
+import Box from "@mui/material/Box";
+import BgVideo from "../assets/Help Desk (1000 x 1000 px).mp4";
 
 const defaultTheme = createTheme();
 
 export default function Login() {
-  // const [selectedTab, setSelectedTab] = useState(0);
-
-  // const handleTabChange = (_event: any, newValue: SetStateAction<number>) => {
-    // setSelectedTab(newValue);
-  // };
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ minWidth: "100vw" }}>
@@ -26,12 +18,31 @@ export default function Login() {
           spacing={2}
           size={{ xs: 12, sm: 8, md: 6 }}
           sx={{
-            backgroundImage: `url(${BgImgLogin})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundColor: (t) => (t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900]),
+            position: "relative",
+            overflow: "hidden",
+            backgroundColor: (t) =>
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
           }}
-        />
+        >
+          <Box
+            component="video"
+            autoPlay
+            muted
+            loop
+            sx={{
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              zIndex: 0,
+            }}
+          >
+            <source src={BgVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </Box>
+        </Grid>
         <Grid
           size={{ xs: 12, sm: 8, md: 6 }}
           component={Paper}
@@ -44,18 +55,9 @@ export default function Login() {
             justifyContent: "center",
             alignItems: "center",
             height: "100vh",
-           
           }}
         >
-          {/* Tabs to toggle between Login and Signup */}
-          {/* <Tabs value={selectedTab} onChange={handleTabChange} aria-label="login-signup-tabs" >
-            <Tab label="Login" />
-            <Tab label="Signup" />
-          </Tabs> */}
-          <LoginForm/>
-
-          {/* Conditional rendering based on selectedTab */}
-          {/* // {selectedTab === 0 ? <LoginForm /> : <SignupForm />} */}
+          <LoginForm />
         </Grid>
       </Grid>
     </ThemeProvider>
