@@ -9,8 +9,7 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import Drawer from "@mui/material/Drawer";
 import { useNavigate } from "react-router-dom";
 import AppDrawer from "./AppDrawer";
-
-
+import colors from "../styles/Theme";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -26,7 +25,7 @@ const Header: React.FC = () => {
 
   return (
     <Box sx={{ flexGrow: 1, paddingBottom: 10 }}>
-      <AppBar position="fixed" sx={{ backgroundColor: "#40BFB4" }}>
+      <AppBar position="fixed" sx={{ backgroundColor: colors.primary }}>
         <Toolbar>
           <IconButton
             size="large"

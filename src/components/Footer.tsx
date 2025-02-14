@@ -1,28 +1,21 @@
 import { Box, Divider, Link, Typography } from "@mui/material";
 import logo from "../../public/Logo.svg";
+import colors from "../styles/Theme";
 
-const footer = () => {
+const Footer = () => {
   return (
     <Box
-      className="fixed-bottom"
-      style={{
+      component="footer"
+      sx={{
+        bgcolor: colors.background, 
+        p: 2,
+        width: "100%",
         position: "relative",
         bottom: 0,
-        left: 0,
-        right: 0,
-        width: "100%",
       }}
-      sx={{ bgcolor: "background.paper", p: 4 }}
-      component="footer"
-      zIndex={-1}
     >
       <Divider />
-      <Typography
-        variant="body2"
-        color="text.secondary"
-        align="center"
-        style={{ marginTop: "2%" }}
-      >
+      <Typography variant="body2" sx={{ color: colors.textSecondary }} align="center">
         {"Copyright © "}
         <Link color="inherit" href="https://www.ncinga.net/">
           <img src={logo} alt="logo" style={{ width: "60px" }} />
@@ -35,4 +28,4 @@ const footer = () => {
   );
 };
 
-export default footer;
+export default Footer;
