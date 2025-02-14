@@ -16,6 +16,7 @@ import {
   FormHelperText,
   SelectChangeEvent,
 } from "@mui/material";
+import theme from "../../styles/Theme";
 
 enum UserRole {
   ADMIN = "admin",
@@ -31,7 +32,6 @@ interface IFormData {
   profilePic: File | null;
 }
 
-// Separate interface for form error messages
 interface IFormErrors {
   name?: string;
   email?: string;
@@ -66,9 +66,7 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
 
   const [errors, setErrors] = useState<IFormErrors>({});
   const [showNotification, setShowNotification] = useState(false);
-  const [notificationStatus, setNotificationStatus] = useState<
-    "success" | "error"
-  >("success");
+  const [notificationStatus, setNotificationStatus] = useState<"success" | "error">("success");
   const [notificationMessage, setNotificationMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -94,13 +92,10 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
 
     if (!formData.name.trim()) newErrors.name = "This field is required";
     if (!formData.email.trim()) newErrors.email = "This field is required";
-    if (!isEditing && !formData.password.trim())
-      newErrors.password = "This field is required";
+    if (!isEditing && !formData.password.trim()) newErrors.password = "This field is required";
     if (!formData.userRole) newErrors.userRole = "This field is required";
-    if (!formData.companyRegistered.trim())
-      newErrors.companyRegistered = "This field is required";
+    if (!formData.companyRegistered.trim()) newErrors.companyRegistered = "This field is required";
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email.trim())) {
       newErrors.email = "Please enter a valid email address";
@@ -166,7 +161,7 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
     <>
       <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
         <form onSubmit={handleSubmit}>
-          <Box sx={{ backgroundColor: "teal", color: "white" }}>
+          <Box sx={{ backgroundColor: theme.primary, color: theme.white }}>
             <DialogTitle sx={{ textAlign: "center" }}>
               {isEditing ? "Edit User" : "Add New User"}
             </DialogTitle>
@@ -182,6 +177,7 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
               error={!!errors.name}
               helperText={errors.name}
               disabled={isSubmitting}
+              
             />
             <TextField
               fullWidth
@@ -194,6 +190,7 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
               error={!!errors.email}
               helperText={errors.email}
               disabled={isSubmitting}
+              
             />
             {!isEditing && (
               <TextField
@@ -207,16 +204,20 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
                 error={!!errors.password}
                 helperText={errors.password}
                 disabled={isSubmitting}
+                
               />
             )}
             <FormControl fullWidth margin="normal" error={!!errors.userRole}>
-              <InputLabel id="user-role-label">User Role</InputLabel>
+              <InputLabel id="user-role-label" >
+                User Role
+              </InputLabel>
               <Select
                 labelId="user-role-label"
                 value={formData.userRole}
                 onChange={handleRoleChange}
                 label="User Role"
                 disabled={isSubmitting}
+                
               >
                 <MenuItem value={UserRole.ADMIN}>Admin</MenuItem>
                 <MenuItem value={UserRole.VENDOR}>Vendor</MenuItem>
@@ -235,13 +236,14 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
               error={!!errors.companyRegistered}
               helperText={errors.companyRegistered}
               disabled={isSubmitting}
+              
             />
           </DialogContent>
           <DialogActions sx={{ pb: 4, px: 3 }}>
             <Button
               variant="outlined"
               onClick={onClose}
-              sx={{ p: 2, borderColor: "orange", color: "orange" }}
+              sx={{ p: 2, borderColor: theme.secondary, color: theme.secondary }}
               disabled={isSubmitting}
             >
               Cancel
@@ -249,7 +251,7 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
             <Button
               type="submit"
               variant="contained"
-              sx={{ p: 2, backgroundColor: "teal" }}
+              sx={{ p: 2, backgroundColor: theme.primary }}
               disabled={isSubmitting}
             >
               {isSubmitting ? "Saving..." : isEditing ? "Update" : "Add User"}

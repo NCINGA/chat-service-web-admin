@@ -32,6 +32,7 @@ import {
 } from "@mui/icons-material";
 import UserRegistrationForm from "../components/UserManagementComponent/userAddFoarm";
 import BGIMG from "../assets/BgImg.png";
+import colors from "../styles/Theme";
 
 enum UserRole {
   ADMIN = "admin",
@@ -231,7 +232,7 @@ const UserManagement: React.FC = () => {
             gap: isMobile ? 2 : 0,
           }}
         >
-          <Typography variant="h5" component="h1" sx={{ color: "teal" }}>
+          <Typography variant="h5" component="h1" sx={{ color: colors.fontsColors.header }}>
             User Management
           </Typography>
           <Button
@@ -239,10 +240,10 @@ const UserManagement: React.FC = () => {
             startIcon={<AddIcon />}
             onClick={() => setIsFormOpen(true)}
             sx={{
-              backgroundColor: "teal",
-              color: "white",
+              backgroundColor: colors.primary,
+              color: colors.white,
               "&:hover": {
-                backgroundColor: "orange",
+                backgroundColor: colors.secondary,
               },
               boxShadow: 10,
               borderRadius: 5,
@@ -261,17 +262,17 @@ const UserManagement: React.FC = () => {
             </Box>
           ) : (
             <Table>
-              <TableHead>
-                <TableRow sx={{ backgroundColor: "teal" }}>
-                  <TableCell sx={{ color: "white" }}>User</TableCell>
+              <TableHead sx={{ textAlign: "center" }}>
+                <TableRow sx={{ backgroundColor: colors.primary,  }}>
+                  <TableCell sx={{ color: colors.white }}>User</TableCell>
                   {!isMobile && (
-                    <TableCell sx={{ color: "white" }}>Email</TableCell>
+                    <TableCell sx={{ color: colors.white }}>Email</TableCell>
                   )}
-                  <TableCell sx={{ color: "white" }}>Role</TableCell>
+                  <TableCell sx={{ color: colors.white }}>Role</TableCell>
                   {!isMobile && (
-                    <TableCell sx={{ color: "white" }}>Company</TableCell>
+                    <TableCell sx={{ color: colors.white }}>Company</TableCell>
                   )}
-                  <TableCell align="center" sx={{ color: "white" }}>
+                  <TableCell align="center" sx={{ color: colors.white }}>
                     Actions
                   </TableCell>
                 </TableRow>
@@ -308,14 +309,14 @@ const UserManagement: React.FC = () => {
                       <TableCell align="center">
                         <IconButton
                           size="small"
-                          sx={{ color: "teal" }}
+                          sx={{ color: colors.primary }}
                           onClick={() => handleEditClick(user)}
                         >
                           <EditIcon />
                         </IconButton>
                         <IconButton
                           size="small"
-                          sx={{ color: "orange" }}
+                          sx={{ color: colors.secondary }}
                           onClick={() => handleDeleteClick(user)}
                         >
                           <DeleteIcon />
@@ -362,7 +363,7 @@ const UserManagement: React.FC = () => {
           maxWidth="xs"
           fullWidth
         >
-          <DialogTitle sx={{ backgroundColor: "teal", color: "white" }}>
+          <DialogTitle sx={{ backgroundColor: colors.primary, color: colors.white }}>
             Confirm Delete
           </DialogTitle>
           <DialogContent sx={{ mt: 2 }}>
@@ -371,14 +372,14 @@ const UserManagement: React.FC = () => {
           <DialogActions sx={{ pb: 2, px: 3 }}>
             <Button
               onClick={() => setIsDeleteDialogOpen(false)}
-              sx={{ color: "teal" }}
+              sx={{ color: colors.primary }}
             >
               Cancel
             </Button>
             <Button
               onClick={handleConfirmDelete}
               variant="contained"
-              sx={{ backgroundColor: "orange" }}
+              sx={{ backgroundColor: colors.secondary }}
             >
               Delete
             </Button>
