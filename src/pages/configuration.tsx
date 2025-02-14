@@ -9,11 +9,10 @@ import {
   CircularProgress,
   InputAdornment,
   Stack,
-  colors,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ConfigBG from "../assets/BGImgConfig.png";
-import theme from "../styles/Theme";
+import colorTheme from "../styles/Theme";
 
 // const THEME = {
 //   white: "#FFFFFF",
@@ -24,15 +23,15 @@ import theme from "../styles/Theme";
 const StyledButton = styled(Button)(({ color }) => ({
   backgroundColor: color,
   "&:hover": {
-    backgroundColor: color === theme.secondary ? "#cc8400" : "#006666",
+    backgroundColor: color === colorTheme.secondary ? "#cc8400" : "#006666",
   },
-  color: theme.white,
+  color: colorTheme.white,
 }));
 
 const JsonEditor = styled(TextField)({
   "& .MuiOutlinedInput-root": {
     fontFamily: "monospace",
-    backgroundColor: theme.white,
+    backgroundColor: colorTheme.white,
   },
 });
 
@@ -73,7 +72,7 @@ const ConfigUI = () => {
           variant="h4"
           align="center"
           sx={{
-            color: theme.fontsColors.header,
+            color: colorTheme.fontsColors.header,
             mb: 4,
             fontWeight: 500,
           }}
@@ -86,7 +85,7 @@ const ConfigUI = () => {
           sx={{
             border: "none",
             height: 2,
-            backgroundColor: theme.secondary,
+            backgroundColor: colorTheme.secondary,
             mb: 4,
           }}
         />
@@ -98,7 +97,7 @@ const ConfigUI = () => {
             value={selectedType}
             onChange={handleTypeChange}
             fullWidth
-            sx={{ backgroundColor: theme.white }}
+            sx={{ backgroundColor: colorTheme.white }}
             InputProps={{
               startAdornment: isLoading && (
                 <InputAdornment position="start">
@@ -124,7 +123,7 @@ const ConfigUI = () => {
               sx={{
                 "& .MuiOutlinedInput-root": {
                   fontFamily: "monospace",
-                  backgroundColor: theme.white,
+                  backgroundColor: colorTheme.white,
                 },
               }}
             />
@@ -142,7 +141,7 @@ const ConfigUI = () => {
           <Typography
             variant="body2"
             sx={{
-              color: theme.fontsColors.normal,
+              color: colorTheme.fontsColors.normal,
               fontWeight: 500,
             }}
           >
@@ -152,21 +151,21 @@ const ConfigUI = () => {
           <Stack direction="row" spacing={2}>
             <StyledButton
               variant="contained"
-              sx={{ backgroundColor: theme.secondary }}
+              sx={{ backgroundColor: colorTheme.secondary }}
             >
               Update
             </StyledButton>
 
             <StyledButton
               variant="contained"
-              sx={{ backgroundColor: theme.primary }}
+              sx={{ backgroundColor: colorTheme.primary }}
             >
               Save Backup
             </StyledButton>
 
             <StyledButton
               variant="contained"
-              sx={{ backgroundColor: theme.primary }}
+              sx={{ backgroundColor: colorTheme.primary }}
             >
               Restore Backup
             </StyledButton>

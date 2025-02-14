@@ -16,7 +16,7 @@ import {
   FormHelperText,
   SelectChangeEvent,
 } from "@mui/material";
-import theme from "../../styles/Theme";
+import colorTheme from "../../styles/Theme";
 
 enum UserRole {
   ADMIN = "admin",
@@ -161,7 +161,7 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
     <>
       <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
         <form onSubmit={handleSubmit}>
-          <Box sx={{ backgroundColor: theme.primary, color: theme.white }}>
+          <Box sx={{ backgroundColor: colorTheme.primary, color: colorTheme.white }}>
             <DialogTitle sx={{ textAlign: "center" }}>
               {isEditing ? "Edit User" : "Add New User"}
             </DialogTitle>
@@ -243,7 +243,7 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
             <Button
               variant="outlined"
               onClick={onClose}
-              sx={{ p: 2, borderColor: theme.secondary, color: theme.secondary }}
+              sx={{ p: 2, borderColor: colorTheme.secondary, color: colorTheme.secondary }}
               disabled={isSubmitting}
             >
               Cancel
@@ -251,7 +251,7 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
             <Button
               type="submit"
               variant="contained"
-              sx={{ p: 2, backgroundColor: theme.primary }}
+              sx={{ p: 2, backgroundColor: colorTheme.primary }}
               disabled={isSubmitting}
             >
               {isSubmitting ? "Saving..." : isEditing ? "Update" : "Add User"}

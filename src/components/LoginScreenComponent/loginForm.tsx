@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import HarvestIQ from "../../assets/feLogo.png";
 import Grid from "@mui/material/Grid2";
-import colors from "../../styles/Theme"
+import colorTheme from "../../styles/Theme"
 
 const dummyCredentials = [{ email: "demo@gmail.com", password: "12345" }];
 
@@ -58,7 +58,7 @@ const LoginForm = () => {
       <Typography
         component="h1"
         variant="h5"
-        style={{ fontFamily: "Poppins, sans-serif", color: colors.primary }}
+        style={{ fontFamily: "Poppins, sans-serif", color: colorTheme.primary }}
       >
         Welcome to Admin Dashboard
       </Typography>
@@ -85,14 +85,14 @@ const LoginForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           sx={{
-            "& label": { color: colors.primary },
-            "& label.Mui-focused": { color: colors.primary },
-            "& .MuiInput-underline:before": { borderBottomColor: colors.primary },
-            "& .MuiInput-underline:after": { borderBottomColor: colors.primary },
+            "& label": { color: colorTheme.primary },
+            "& label.Mui-focused": { color: colorTheme.primary },
+            "& .MuiInput-underline:before": { borderBottomColor: colorTheme.primary },
+            "& .MuiInput-underline:after": { borderBottomColor: colorTheme.primary },
             "& .MuiOutlinedInput-root": {
-              "& fieldset": { borderColor: colors.primary },
-              "&:hover fieldset": { borderColor: colors.primary },
-              "&.Mui-focused fieldset": { borderColor: colors.primary },
+              "& fieldset": { borderColor: colorTheme.primary },
+              "&:hover fieldset": { borderColor: colorTheme.primary },
+              "&.Mui-focused fieldset": { borderColor: colorTheme.primary },
             },
           }}
         />
@@ -108,22 +108,22 @@ const LoginForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           sx={{
-            "& label": { color: colors.primary },
-            "& label.Mui-focused": { color: colors.primary },
-            "& .MuiInput-underline:before": { borderBottomColor: colors.primary },
-            "& .MuiInput-underline:after": { borderBottomColor: colors.primary },
+            "& label": { color: colorTheme.primary },
+            "& label.Mui-focused": { color: colorTheme.primary },
+            "& .MuiInput-underline:before": { borderBottomColor: colorTheme.primary },
+            "& .MuiInput-underline:after": { borderBottomColor: colorTheme.primary },
             "& .MuiOutlinedInput-root": {
-              "& fieldset": { borderColor: colors.primary },
-              "&:hover fieldset": { borderColor: colors.primary },
-              "&.Mui-focused fieldset": { borderColor: colors.primary },
+              "& fieldset": { borderColor: colorTheme.primary },
+              "&:hover fieldset": { borderColor: colorTheme.primary },
+              "&.Mui-focused fieldset": { borderColor: colorTheme.primary },
             },
           }}
         />
         <FormControlLabel
-          control={<Checkbox value="remember" sx={{ color: colors.secondary }} />}
+          control={<Checkbox value="remember" sx={{ color: colorTheme.secondary }} />}
           label="Remember me"
           sx={{
-            "& .MuiFormControlLabel-label": { color: colors.secondary },
+            "& .MuiFormControlLabel-label": { color: colorTheme.secondary },
           }}
         />
         <Button
@@ -134,13 +134,13 @@ const LoginForm = () => {
             mt: 3,
             mb: 2,
             fontFamily: "Poppins, sans-serif",
-            borderColor: colors.white,
-            backgroundColor: colors.primary,
-            color: colors.white,
+            borderColor: colorTheme.white,
+            backgroundColor: colorTheme.primary,
+            color: colorTheme.white,
             "&:hover": {
-              backgroundColor: colors.white,
-              color: colors.primary,
-              borderColor: colors.primary,
+              backgroundColor: colorTheme.white,
+              color: colorTheme.primary,
+              borderColor: colorTheme.primary,
             },
           }}
         >
