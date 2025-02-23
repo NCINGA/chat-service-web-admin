@@ -3,8 +3,9 @@ import Paper from "@mui/material/Paper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Grid from "@mui/material/Grid2";
 import LoginForm from "../components/LoginScreenComponent/loginForm";
-import Box from "@mui/material/Box";
-import BgVideo from "../assets/Help Desk (1000 x 1000 px).mp4";
+// import Box from "@mui/material/Box";
+// import BgVideo from "../assets/Help Desk (1000 x 1000 px).mp4";
+import LoginCover from "../assets/LoginCover.png";
 
 const defaultTheme = createTheme();
 
@@ -20,13 +21,9 @@ export default function Login() {
           sx={{
             position: "relative",
             overflow: "hidden",
-            backgroundColor: (t) =>
-              t.palette.mode === "light"
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
           }}
         >
-          <Box
+          {/* <Box
             component="video"
             autoPlay
             muted
@@ -41,7 +38,8 @@ export default function Login() {
           >
             <source src={BgVideo} type="video/mp4" />
             Your browser does not support the video tag.
-          </Box>
+          </Box> */}
+          <img src={LoginCover} alt="LoginCover" style={{ height: "100vh" }} />
         </Grid>
         <Grid
           size={{ xs: 12, sm: 8, md: 6 }}

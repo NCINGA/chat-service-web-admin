@@ -90,11 +90,11 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
   const validateForm = (): boolean => {
     const newErrors: IFormErrors = {};
 
-    if (!formData.name.trim()) newErrors.name = "This field is required";
-    if (!formData.email.trim()) newErrors.email = "This field is required";
-    if (!isEditing && !formData.password.trim()) newErrors.password = "This field is required";
-    if (!formData.userRole) newErrors.userRole = "This field is required";
-    if (!formData.companyRegistered.trim()) newErrors.companyRegistered = "This field is required";
+    if (!formData.name.trim()) newErrors.name = "User name is required. Please enter a name.";
+    if (!formData.email.trim()) newErrors.email = "Email is required. Please enter a valid email.";
+    if (!isEditing && !formData.password.trim()) newErrors.password = "Password is required. Please enter a password.";
+    if (!formData.userRole) newErrors.userRole = "User role is required. Please select a role.";
+    if (!formData.companyRegistered.trim()) newErrors.companyRegistered = "Company name is required. Please enter a company name.";
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email.trim())) {
