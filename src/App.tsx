@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
 import UserManagement from "./pages/userManagement";
 import ConfigUI from "./pages/configuration";
 import { CssBaseline } from "@mui/material";
-import { ApolloClient, ApolloProvider } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
 import client from "./graphql/apploClient";
 
 const Layout = () => {
@@ -15,7 +15,7 @@ const Layout = () => {
       style={{
         display: "flex",
         flexDirection: "column",
-        minHeight: "100vh", // Full height
+        minHeight: "100vh",
       }}
     >
       <CssBaseline />
@@ -31,7 +31,7 @@ const Layout = () => {
 function App() {
   return (
     <BrowserRouter>
-      export default client;
+
       <ApolloProvider client={client}>
         <Routes>
           <Route path="/" element={<Login />} />
