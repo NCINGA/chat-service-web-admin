@@ -6,6 +6,8 @@ import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
 import UserManagement from "./pages/userManagement";
 import ConfigUI from "./pages/configuration";
 import { CssBaseline } from "@mui/material";
+import { ApolloClient, ApolloProvider } from "@apollo/client";
+import client from "./graphql/apploClient";
 
 const Layout = () => {
   return (
@@ -26,19 +28,21 @@ const Layout = () => {
   );
 };
 
-
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<Login />} />
+      export default client;
+      <ApolloProvider client={client}>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
 
-        <Route element={<Layout />}>
-          <Route path="/user" element={<UserManagement />} />
-          <Route path="/configuration" element={<ConfigUI />} />
-        </Route>
-      </Routes>
+          <Route element={<Layout />}>
+            <Route path="/user" element={<UserManagement />} />
+            <Route path="/configuration" element={<ConfigUI />} />
+          </Route>
+        </Routes>
+      </ApolloProvider>
     </BrowserRouter>
   );
 }

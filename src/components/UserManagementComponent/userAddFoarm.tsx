@@ -18,26 +18,24 @@ import {
 } from "@mui/material";
 import colorTheme from "../../styles/Theme";
 
-enum UserRole {
-  ADMIN = "admin",
-  VENDOR = "vendor",
+enum role {
+  ADMIN = "ADMIN",
+  VENDOR = "VENDOR",
 }
 
 interface IFormData {
-  name: string;
+  id: string;
+  username: string;
   email: string;
   password: string;
-  userRole: UserRole | "";
-  companyRegistered: string;
-  profilePic: File | null;
+  role: role | "";
 }
 
 interface IFormErrors {
   name?: string;
   email?: string;
   password?: string;
-  userRole?: string;
-  companyRegistered?: string;
+  role?: string;
 }
 
 interface UserRegistrationFormProps {
@@ -56,17 +54,18 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
   isEditing = false,
 }) => {
   const [formData, setFormData] = useState<IFormData>({
-    name: "",
+    id: "",
+    username: "",
     email: "",
     password: "",
-    userRole: "",
-    companyRegistered: "",
-    profilePic: null,
+    role: "",
   });
 
   const [errors, setErrors] = useState<IFormErrors>({});
   const [showNotification, setShowNotification] = useState(false);
-  const [notificationStatus, setNotificationStatus] = useState<"success" | "error">("success");
+  const [notificationStatus, setNotificationStatus] = useState<
+    "success" | "error"
+  >("success");
   const [notificationMessage, setNotificationMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -76,12 +75,11 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
       setErrors({});
     } else if (!open) {
       setFormData({
-        name: "",
+        id: "",
+        username: "",
         email: "",
         password: "",
-        userRole: "",
-        companyRegistered: "",
-        profilePic: null,
+        role: "",
       });
       setErrors({});
     }
@@ -90,11 +88,11 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
   const validateForm = (): boolean => {
     const newErrors: IFormErrors = {};
 
-    if (!formData.name.trim()) newErrors.name = "This field is required";
-    if (!formData.email.trim()) newErrors.email = "This field is required";
-    if (!isEditing && !formData.password.trim()) newErrors.password = "This field is required";
-    if (!formData.userRole) newErrors.userRole = "This field is required";
-    if (!formData.companyRegistered.trim()) newErrors.companyRegistered = "This field is required";
+    if (!formData.username.trim()) newErrors.name = "Username is required";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    if (!isEditing && !formData.password.trim())
+      newErrors.password = "Password is required";
+    if (!formData.role) newErrors.role = "User role is required";
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email.trim())) {
@@ -113,12 +111,12 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
     setErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
-  const handleRoleChange = (event: SelectChangeEvent<UserRole | "">): void => {
+  const handleRoleChange = (event: SelectChangeEvent<role | "">): void => {
     setFormData((prev) => ({
       ...prev,
-      userRole: event.target.value as UserRole | "",
+      role: event.target.value as role | "",
     }));
-    setErrors((prev) => ({ ...prev, userRole: undefined }));
+    setErrors((prev) => ({ ...prev, role: undefined }));
   };
 
   const handleSubmit = async (
@@ -161,7 +159,12 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
     <>
       <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
         <form onSubmit={handleSubmit}>
-          <Box sx={{ backgroundColor: colorTheme.primary, color: colorTheme.white }}>
+          <Box
+            sx={{
+              backgroundColor: colorTheme.primary,
+              color: colorTheme.white,
+            }}
+          >
             <DialogTitle sx={{ textAlign: "center" }}>
               {isEditing ? "Edit User" : "Add New User"}
             </DialogTitle>
@@ -171,13 +174,12 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
               fullWidth
               margin="normal"
               label="Name"
-              name="name"
-              value={formData.name}
+              name="username"
+              value={formData.username}
               onChange={handleInputChange}
               error={!!errors.name}
               helperText={errors.name}
               disabled={isSubmitting}
-              
             />
             <TextField
               fullWidth
@@ -190,7 +192,6 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
               error={!!errors.email}
               helperText={errors.email}
               disabled={isSubmitting}
-              
             />
             {!isEditing && (
               <TextField
@@ -204,46 +205,32 @@ export const UserRegistrationForm: React.FC<UserRegistrationFormProps> = ({
                 error={!!errors.password}
                 helperText={errors.password}
                 disabled={isSubmitting}
-                
               />
             )}
-            <FormControl fullWidth margin="normal" error={!!errors.userRole}>
-              <InputLabel id="user-role-label" >
-                User Role
-              </InputLabel>
+            <FormControl fullWidth margin="normal" error={!!errors.role}>
+              <InputLabel id="user-role-label">User Role</InputLabel>
               <Select
                 labelId="user-role-label"
-                value={formData.userRole}
+                value={formData.role}
                 onChange={handleRoleChange}
                 label="User Role"
                 disabled={isSubmitting}
-                
               >
-                <MenuItem value={UserRole.ADMIN}>Admin</MenuItem>
-                <MenuItem value={UserRole.VENDOR}>Vendor</MenuItem>
+                <MenuItem value={role.ADMIN}>Admin</MenuItem>
+                <MenuItem value={role.VENDOR}>Vendor</MenuItem>
               </Select>
-              {errors.userRole && (
-                <FormHelperText>{errors.userRole}</FormHelperText>
-              )}
+              {errors.role && <FormHelperText>{errors.role}</FormHelperText>}
             </FormControl>
-            <TextField
-              fullWidth
-              margin="normal"
-              label="Company"
-              name="companyRegistered"
-              value={formData.companyRegistered}
-              onChange={handleInputChange}
-              error={!!errors.companyRegistered}
-              helperText={errors.companyRegistered}
-              disabled={isSubmitting}
-              
-            />
           </DialogContent>
           <DialogActions sx={{ pb: 4, px: 3 }}>
             <Button
               variant="outlined"
               onClick={onClose}
-              sx={{ p: 2, borderColor: colorTheme.secondary, color: colorTheme.secondary }}
+              sx={{
+                p: 2,
+                borderColor: colorTheme.secondary,
+                color: colorTheme.secondary,
+              }}
               disabled={isSubmitting}
             >
               Cancel
