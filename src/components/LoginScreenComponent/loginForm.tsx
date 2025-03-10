@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import HarvestIQ from "../../assets/feLogo.png";
 import Grid from "@mui/material/Grid2";
-import colorTheme from "../../styles/Theme"
+import colorTheme from "../../styles/Theme";
 
 const dummyCredentials = [{ email: "demo@gmail.com", password: "12345" }];
 
@@ -87,8 +87,12 @@ const LoginForm = () => {
           sx={{
             "& label": { color: colorTheme.primary },
             "& label.Mui-focused": { color: colorTheme.primary },
-            "& .MuiInput-underline:before": { borderBottomColor: colorTheme.primary },
-            "& .MuiInput-underline:after": { borderBottomColor: colorTheme.primary },
+            "& .MuiInput-underline:before": {
+              borderBottomColor: colorTheme.primary,
+            },
+            "& .MuiInput-underline:after": {
+              borderBottomColor: colorTheme.primary,
+            },
             "& .MuiOutlinedInput-root": {
               "& fieldset": { borderColor: colorTheme.primary },
               "&:hover fieldset": { borderColor: colorTheme.primary },
@@ -110,8 +114,12 @@ const LoginForm = () => {
           sx={{
             "& label": { color: colorTheme.primary },
             "& label.Mui-focused": { color: colorTheme.primary },
-            "& .MuiInput-underline:before": { borderBottomColor: colorTheme.primary },
-            "& .MuiInput-underline:after": { borderBottomColor: colorTheme.primary },
+            "& .MuiInput-underline:before": {
+              borderBottomColor: colorTheme.primary,
+            },
+            "& .MuiInput-underline:after": {
+              borderBottomColor: colorTheme.primary,
+            },
             "& .MuiOutlinedInput-root": {
               "& fieldset": { borderColor: colorTheme.primary },
               "&:hover fieldset": { borderColor: colorTheme.primary },
@@ -119,13 +127,13 @@ const LoginForm = () => {
             },
           }}
         />
-        <FormControlLabel
+        {/* <FormControlLabel
           control={<Checkbox value="remember" sx={{ color: colorTheme.secondary }} />}
           label="Remember me"
           sx={{
             "& .MuiFormControlLabel-label": { color: colorTheme.secondary },
           }}
-        />
+        /> */}
         <Button
           type="submit"
           variant="outlined"

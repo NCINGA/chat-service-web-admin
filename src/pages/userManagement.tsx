@@ -10,7 +10,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Avatar,
   IconButton,
   TablePagination,
   Chip,
@@ -29,7 +28,6 @@ import {
   Add as AddIcon,
   Edit as EditIcon,
   Delete as DeleteIcon,
-  Password,
 } from "@mui/icons-material";
 import UserRegistrationForm from "../components/UserManagementComponent/userAddFoarm";
 import BGIMG from "../assets/BgImg.png";
@@ -67,28 +65,6 @@ const UserManagement: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  //Dummy data
-  // const dummyUsers: IUser[] = [
-  //   {
-  //     _id: "1",
-  //     name: "John Doe",
-  //     email: "john.doe@example.com",
-  //     userRole: UserRole.ADMIN,
-  //     companyRegistered: "Company A",
-  //     profilePic: "",
-  //     createdAt: "2025-01-01T00:00:00Z",
-  //   },
-  //   {
-  //     _id: "2",
-  //     name: "Jane Smith",
-  //     email: "jane.smith@example.com",
-  //     userRole: UserRole.VENDOR,
-  //     companyRegistered: "Company B",
-  //     profilePic: "",
-  //     createdAt: "2025-01-02T00:00:00Z",
-  //   },
-  // ];
-
   const [users, setUsers] = useState<IUser[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -106,7 +82,7 @@ const UserManagement: React.FC = () => {
     refetch: refetchUsers,
   } = useQuery<{ getAllUsers: IUser[] }>(GET_ALL_USERS);
 
-  const [createUser, { loading: creating }] = useMutation(REGISTER, {
+  const [createUser] = useMutation(REGISTER, {
     onCompleted: () => {
       console.log("Create User Success!");
       refetchUsers();
@@ -136,11 +112,10 @@ const UserManagement: React.FC = () => {
     },
     onError: (error) => {
       console.error("Error updating user", error);
-    } 
-  })
+    },
+  });
 
-  const [getUserById, { data: selectedNasData}] =
-    useLazyQuery(GET_USER_BY_ID);
+  const [] = useLazyQuery(GET_USER_BY_ID);
 
   useEffect(() => {
     setIsLoading(loading);
@@ -222,7 +197,7 @@ const UserManagement: React.FC = () => {
   const handleEditUser = async (userData: IFormData): Promise<void> => {
     if (!selectedUser) return;
 
-    //  getUserById({ variables: { id: userData.id } });    
+    //  getUserById({ variables: { id: userData.id } });
 
     try {
       setIsLoading(true);
@@ -421,7 +396,11 @@ const UserManagement: React.FC = () => {
                       <TableCell>
                         <Chip
                           label={user.role}
-                          color={user.role.toUpperCase() === role.ADMIN ? "success" : "info"}
+                          color={
+                            user.role.toUpperCase() === role.ADMIN
+                              ? "success"
+                              : "info"
+                          }
                           size="small"
                           sx={{ minWidth: 80 }}
                         />
@@ -473,8 +452,6 @@ const UserManagement: React.FC = () => {
                   email: selectedUser.email,
                   password: "",
                   role: selectedUser.role,
-                  // companyRegistered: selectedUser.companyRegistered,
-                  // profilePic: null,
                 }
               : undefined
           }
