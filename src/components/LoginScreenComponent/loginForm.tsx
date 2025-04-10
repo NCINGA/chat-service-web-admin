@@ -8,28 +8,51 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import HarvestIQ from "../../assets/feLogo.png";
 import Grid from "@mui/material/Grid2";
-import colorTheme from "../../styles/Theme"
+import colorTheme from "../../styles/Theme";
+import axios from "axios";
 
-const dummyCredentials = [{ email: "demo@gmail.com", password: "12345" }];
+
+// const dummyCredentials = [{ email: "demo@gmail.com", password: "12345" }];
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("demo@gmail.com");
-  const [password, setPassword] = useState("12345");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setError("");
+    
+    try {
+      const response = await axios.post('http://localhost:8081/auth/login', {
+        email: email,
+        password: password,
+      });
 
-    const isValid = dummyCredentials.some(
-      (credential) =>
-        credential.email === email && credential.password === password
-    );
+      localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem('refreshToken', response.data.refreshToken);
 
-    if (isValid) {
       navigate("/user");
-    } else {
-      alert("Incorrect email or password");
+
+    }catch (err) {
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.message || "Login failed");
+      } else {
+        setError("An unexpected error occurred");
+      }
     }
+
+    // const isValid = dummyCredentials.some(
+    //   (credential) =>
+    //     credential.email === email && credential.password === password
+    // );
+
+    // if (isValid) {
+    //   navigate("/user");
+    // } else {
+    //   alert("Incorrect email or password");
+    // }
   };
 
   return (
@@ -73,6 +96,11 @@ const LoginForm = () => {
           backdropFilter: "blur(100px)",
         }}
       >
+        {error && (
+          <Typography color="error" sx={{ mb: 2}}>
+            {error}
+          </Typography>
+        )}
         <TextField
           margin="normal"
           required

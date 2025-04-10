@@ -10,13 +10,40 @@ import Drawer from "@mui/material/Drawer";
 import { useNavigate } from "react-router-dom";
 import AppDrawer from "./AppDrawer";
 import colors from "../styles/Theme";
+import axios from "axios";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const handleLogout = () => {
-    navigate("/");
+  const handleLogout = async () => {
+    try {
+
+      const refreshToken = localStorage.getItem("refreshToken");
+
+      if (!refreshToken) {
+        throw new Error("No refresh token found");
+      }
+
+      await axios.post("http://localhost:8081/auth/logout", {}, {
+        headers: {
+          Authorization: `Bearer ${refreshToken}`,
+        },
+      });
+
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");  
+
+      navigate("/");
+
+    } catch (error) {
+      console.error('Logout failed:', error);
+
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      navigate("/");
+    }
+    
   };
 
   const toggleDrawer = (open: boolean) => () => {
