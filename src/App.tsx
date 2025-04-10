@@ -8,6 +8,8 @@ import ConfigUI from "./pages/configuration";
 import { CssBaseline } from "@mui/material";
 import { ApolloProvider } from "@apollo/client";
 import client from "./graphql/apploClient";
+import AuditLog from "./pages/AuditLog";
+import Home from "./pages/Home";
 
 const Layout = () => {
   return (
@@ -31,15 +33,16 @@ const Layout = () => {
 function App() {
   return (
     <BrowserRouter>
-
       <ApolloProvider client={client}>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
 
           <Route element={<Layout />}>
+            <Route path="/home" element={<Home />} />
             <Route path="/user" element={<UserManagement />} />
             <Route path="/configuration" element={<ConfigUI />} />
+            <Route path="/auditlog" element={<AuditLog />} />
           </Route>
         </Routes>
       </ApolloProvider>

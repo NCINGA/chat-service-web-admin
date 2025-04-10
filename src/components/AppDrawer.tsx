@@ -13,6 +13,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import sideBar from "../assets/sideBar.png";
 import BuildCircleRoundedIcon from "@mui/icons-material/BuildCircleRounded";
+import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 import colorTheme from "../styles/Theme";
 
 const AppDrawer: React.FC = () => {
@@ -92,12 +93,26 @@ const AppDrawer: React.FC = () => {
               <ListItemText primary="Configuration" />
             </ListItemButton>
           </ListItem>
+          <ListItem
+            sx={{ color: colorTheme.white }}
+            onClick={() => (window.location.href = "/auditlog")}
+          >
+            <ListItemButton sx={{ color: colorTheme.white }}>
+              <ListItemIcon sx={{ color: colorTheme.white }}>
+                <IntegrationInstructionsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Audit Log" />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Box>
 
       <Box sx={{ position: "relative", zIndex: 2 }}>
         <ListItem disablePadding>
-          <ListItemButton sx={{ color: colorTheme.white }} onClick={handleLogout}>
+          <ListItemButton
+            sx={{ color: colorTheme.white }}
+            onClick={handleLogout}
+          >
             <ListItemIcon sx={{ color: colorTheme.white }}>
               <ExitToAppIcon />
             </ListItemIcon>
